@@ -1,11 +1,6 @@
 
-import { Box, Center, VStack, Text, HStack, Button } from '@chakra-ui/react'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { Box, HStack } from '@chakra-ui/react'
 
-import { FaChartBar } from 'react-icons/fa';
-import { FaShieldAlt } from 'react-icons/fa';
-import SidePanel from '../components/Dashboard/LeftPanel';
-import StragtegiesGrid from '../components/Dashboard/Strategies';
 
 export default function Dashboardlayout({ children }: any) {
     return (

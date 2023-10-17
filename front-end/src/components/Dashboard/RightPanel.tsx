@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Text, HStack, Button } from '@chakra-ui/react';
+import { Box, Text, HStack, Button, VStack, Switch } from '@chakra-ui/react';
+import { useStrategies } from '@/context/StrategiesContext';
+import StrategyContentLayout from './StrategyContent';
 
-const RightPanel = ({ selectedStrategy }: any) => {
-
+const RightPanel = () => {
+    const { selectedStrategy }: any = useStrategies();
 
     return (
         <>
@@ -23,36 +25,87 @@ const RightPanel = ({ selectedStrategy }: any) => {
                     w="100%"
                     alignItems={"center"}
                     justifyContent={"space-between"}
-                >       <Text fontWeight="bold">Balance: $0.00</Text>
+                >
+                    <Box
+                        bg={!selectedStrategy ? "#111e34" : "transparent"}
+                    >
+                        <Text
+                            visibility={!selectedStrategy ? "hidden" : "visible"}
+                            opacity={selectedStrategy ? 1 : 0.1}
+                            fontWeight="bold">Balance: $0.00</Text>
+                    </Box>
+                    <Box>
+                        <VStack>
+                            <Text mt={2}>{selectedStrategy}</Text>
 
-                    <Text mt={2}>{selectedStrategy}</Text></HStack>
-                <HStack py={3}>
+                            <HStack
+                                bg={!selectedStrategy ? "#111e34" : "transparent"}
+                                h="20px"
+                                justifyContent={"center"}
+                                color="gray"
+                                display={"flex"}
+                                alignItems={"center"}
+                                fontSize={"xs"}
+
+                            >
+                                <Text
+                                    visibility={!selectedStrategy ? "hidden" : "visible"}
+                                    mt={0}>Opted Insurance</Text>
+                                <Switch
+                                    visibility={!selectedStrategy ? "hidden" : "visible"}
+                                    isChecked={false}
+                                    isDisabled={true}
+                                    readOnly={true}
+                                    size="md" colorScheme='red' />
+                            </HStack>
+                        </VStack>
+
+                    </Box>
+
+
+
+                </HStack >
+                <HStack
+                    mt={4}
+                    py={3}
+                    bg="#111e34"
+                    borderRadius={"12px"}
+                    pl={3}
+                >
                     <Button
-                        bg="#03000f"
+                        bg={!selectedStrategy ? "#182942" : "linear-gradient(to right, #243c81, #3951a2)"}
                         _hover={{
-                            bg: "#03000f"
+                            bg: !selectedStrategy ? "#182942" : "linear-gradient(to right, #243c81, #3951a2)",
                         }}
-                    >Withdraw</Button>
+                        minW="110px"
+                    >
+                        {selectedStrategy ? "Withdraw" : ""}
+                    </Button>
                     <Button
-                        bg="#03000f"
+                        bg={!selectedStrategy ? "#182942" : "linear-gradient(to right, #243c81, #3951a2)"}
                         _hover={{
-                            bg: "#03000f"
+                            bg: !selectedStrategy ? "#182942" : "linear-gradient(to right, #243c81, #3951a2)",
                         }}
-                    >Claim</Button>
+                        minW="90px"
+                    >
+                        {selectedStrategy ? "Claim" : ""}
+                    </Button>
                 </HStack>
 
                 <Box
                     border="solid 0.9px #253350"
                     mt={4}
-                    bg="#132036"
+                    bg={selectedStrategy ? "#253350" : "#132036"}
                     borderRadius={"12px"}
                     px={4}
                     py={6}
+                    h="100%"
                     minH={"400px"}
+                >
+                    <StrategyContentLayout />
+                </Box>
 
-                />
-
-            </Box>
+            </Box >
         </>
     );
 };

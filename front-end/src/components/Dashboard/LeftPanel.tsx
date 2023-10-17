@@ -4,15 +4,28 @@
 
 import { Box, Center, VStack, Text, HStack, Button } from '@chakra-ui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useEffect, useState } from 'react';
 
 import { FaChartBar } from 'react-icons/fa';
 import { FaShieldAlt } from 'react-icons/fa';
 import { MdFlashOn } from 'react-icons/md';
+import { useAccount } from "wagmi";
 
 export default function SidePanel() {
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const { address, isConnected } = useAccount();
+
+    useEffect(() => {
+        if (isConnected) {
+            setIsSignedIn(true);
+        } else {
+            setIsSignedIn(false);
+        }
+    }, [address]);
+
+
     return (
         <>
-
             <VStack
                 h="100vh"
                 position={"fixed"}
@@ -21,8 +34,6 @@ export default function SidePanel() {
                 pt={28}
                 pb={4}
                 top={0}
-
-
             >
                 <Box>
                     <Box
@@ -73,41 +84,45 @@ export default function SidePanel() {
                             <Text pl={3}>Integrations</Text>
                         </Button>
                     </Box>
-                    <Box
-                        py={6}
-                        bg="#182942"
-                        sx={{
-                            backdropFilter: " saturate(140%)",
-                        }}
-                        textAlign={"center"}
-                        px={2}
-                        display={"flex"}
-                        flexDirection={"column"}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        borderRadius={"15px"}
-                    >
-                        <Text
-                            fontSize={"md"}
-                            fontWeight={"bold"}
-                        >Get Started By Connecting your Wallet</Text>
-                        <Text
-                            fontSize={"xs"}
-                            color={"whiteAlpha.600"}
-                            py={2}
-                        >Discover new possibilities and more features by connecting your wallet.</Text>
 
-                        <Box>
-                            <ConnectButton />
+                    {!isSignedIn && (
+                        <Box
+                            py={6}
+                            bg="#182942"
+                            sx={{
+                                backdropFilter: " saturate(140%)",
+                            }}
+                            textAlign={"center"}
+                            px={2}
+                            display={"flex"}
+                            flexDirection={"column"}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            borderRadius={"15px"}
+                        >
+
+                            
+                            <Text
+                                fontSize={"md"}
+                                fontWeight={"bold"}
+                            >Get Started By Connecting your Wallet</Text>
+                            <Text
+                                fontSize={"xs"}
+                                color={"whiteAlpha.600"}
+                                py={2}
+                            >Discover new possibilities and more features by connecting your wallet.</Text>
+
+                            <Box>
+                                <ConnectButton />
+                            </Box>
                         </Box>
+                    )}
 
-                    </Box>
                 </Box>
 
 
 
             </VStack>
-
         </>
     )
 }
