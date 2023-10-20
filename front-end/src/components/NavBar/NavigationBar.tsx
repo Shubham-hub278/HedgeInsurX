@@ -60,15 +60,15 @@ export default function NavigationBar() {
                             <Box
                                 h="40px"
                                 as="img"
-                                src="logro.png"
+                                src="logo.png"
                             />
                             <Heading
                                 // opacity={}
                                 color="whiteAlpha.600"
                                 fontSize={"2xl"} >
-                                {/* HedgeInsurX */}
+                                HedgeInsurX
 
-                                MortyStack
+                            
                             </Heading>
                         </HStack>
                     </Box>
