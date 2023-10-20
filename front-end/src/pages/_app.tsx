@@ -16,23 +16,24 @@ import {
 import { publicProvider } from 'wagmi/providers/public';
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { ModalProvider } from "../context/useModalContext"
+import { StrategiesProvider } from '@/context/StrategiesContext'
+
 
 
 export default function App({ Component, pageProps }: AppProps) {
 
   const { chains, publicClient } = configureChains([polygon, goerli], [publicProvider()]);
 
+
+  const { connectors } = getDefaultWallets({
+    appName: 'My RainbowKit App',
+    projectId: "957c795c4c86e7c46609c0cd4064fa00", //walletconnect ID
+    chains
+  });
+
   const config = createConfig({
     autoConnect: true,
-    connectors: [
-      new InjectedConnector({
-        chains,
-        options: {
-          name: "Injected",
-          shimDisconnect: true,
-        },
-      }),
-    ],
+    connectors: connectors,
     publicClient,
   });
 
@@ -54,11 +55,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <RainbowKitProvider chains={chains}>
         <ModalProvider>
           <ChakraProvider theme={theme}>
-
-            <TabsProvider>
-              <Component {...pageProps} />
-            </TabsProvider>
-
+            <StrategiesProvider>
+              <TabsProvider>
+                <Component {...pageProps} />
+              </TabsProvider>
+            </StrategiesProvider>
           </ChakraProvider>
         </ModalProvider>
 

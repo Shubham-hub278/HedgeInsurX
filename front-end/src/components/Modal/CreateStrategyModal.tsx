@@ -40,15 +40,24 @@ const CreateStrategyModal = ({ isOpen, onClose }: any) => {
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>Create Strategy</ModalHeader>
+            <ModalOverlay
+                opacity={0}
+            />
+            <ModalContent mt={[0, 0, 32]}
+                bg="#232e47"
+                color="whiteAlpha.700"
+
+            >
+                <ModalHeader color={"#0e76fd"}>New Strategy</ModalHeader>
                 <ModalCloseButton />
-                <ModalBody>
+                <ModalBody
+
+                >
                     <FormControl mb={4}>
-                        <FormLabel>Amount to be Invested</FormLabel>
+                        <FormLabel fontSize={"sm"}>Amount to be Invested</FormLabel>
                         <Input
                             type="number"
+                            h="50px"
                             placeholder="Enter amount"
                             name="amount"
                             value={formData.amount}
@@ -56,8 +65,9 @@ const CreateStrategyModal = ({ isOpen, onClose }: any) => {
                         />
                     </FormControl>
                     <FormControl mb={4}>
-                        <FormLabel>Strategy Name</FormLabel>
+                        <FormLabel fontSize={"sm"}>Strategy Name</FormLabel>
                         <Input
+                            h="50px"
                             type="text"
                             placeholder="Enter strategy name"
                             name="strategyName"
@@ -65,21 +75,8 @@ const CreateStrategyModal = ({ isOpen, onClose }: any) => {
                             onChange={handleInputChange}
                         />
                     </FormControl>
-                    <FormControl mb={4}>
-                        <FormLabel>Investment Risk Category Type</FormLabel>
-                        <Select
-                            placeholder="Select risk category"
-                            name="riskCategory"
-                            value={formData.riskCategory}
-                            onChange={handleInputChange}
-                        >
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </Select>
-                    </FormControl>
                     <FormControl display="flex" alignItems="center" mb={4}>
-                        <FormLabel htmlFor="insuranceOptIn" mb="0">
+                        <FormLabel fontSize={"sm"} htmlFor="insuranceOptIn" mb="0">
                             Opt-in for Insurance
                         </FormLabel>
                         <Switch
@@ -91,6 +88,25 @@ const CreateStrategyModal = ({ isOpen, onClose }: any) => {
                             ml={2}
                         />
                     </FormControl>
+
+                    {formData.isInsuranceOpted && (
+                        <FormControl mb={4}>
+                            <FormLabel fontSize={"sm"}>Investment Risk Category Type</FormLabel>
+                            <Select
+                                h="50px"
+                                placeholder="Select risk category"
+                                name="riskCategory"
+                                value={formData.riskCategory}
+                                onChange={handleInputChange}
+                            >
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </Select>
+                        </FormControl>
+
+                    )}
+
                 </ModalBody>
                 <ModalFooter>
                     <Button variant="ghost" mr={3} onClick={onClose}>

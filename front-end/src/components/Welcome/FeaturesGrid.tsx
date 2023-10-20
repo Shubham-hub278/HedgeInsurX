@@ -3,7 +3,14 @@ import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 
 const FeaturesComponent = ({ features }: any) => {
     return (
-        <Box mt={[8, 8, 16]} w="100%" px={32} py={3}>
+        <Box
+            bg="#0f1728"
+            position={"absolute"}
+            w="100%"
+            left={0}
+            mx={0}
+            px={32}
+            mt={[8, 8, 16]} py={3}>
             {features.map((feature: any, index: number) => (
                 <Flex
                     // w="100%"
