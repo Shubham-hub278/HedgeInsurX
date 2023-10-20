@@ -18,9 +18,7 @@ const CreateButton = () => {
     }, [address]);
     const { isModalOpen, openModal, closeModal }: any = useSignInModal();
 
-
     return (
-
         <>
             <Box
                 pl={3}
@@ -48,8 +46,7 @@ const CreateButton = () => {
                             bg: isDisabled ? "#03000f" : "linear-gradient(to right, #243c81, #3951a2)",
                         }}
                         onClick={() => openModal('Modal content goes here')}
-                    >
-                 
+                    >     
                         Strategy
                     </Button>
                 </Box>
@@ -59,8 +56,6 @@ const CreateButton = () => {
                 onClose={closeModal}
             />
         </>
-
-
     );
 };
 

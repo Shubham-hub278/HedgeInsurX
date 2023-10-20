@@ -6,7 +6,6 @@ import { Box } from "@chakra-ui/react";
 export const BackDrop = () => {
     return (
         <>
-
             <Box
                 bg="#09162e"
                 zIndex={0}
@@ -14,10 +13,7 @@ export const BackDrop = () => {
                 position="fixed"
                 bottom={0}
                 w="100%"
-
             />
-
-
         </>
     )
 }

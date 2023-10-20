@@ -4,7 +4,6 @@ import { FiCircle } from 'react-icons/fi';
 import { List, ListItem, Icon } from "@chakra-ui/react";
 
 
-
 const BulletTitle = (prop: { title: string }) => {
     return (
 

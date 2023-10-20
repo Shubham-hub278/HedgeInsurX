@@ -10,7 +10,7 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import {
-  polygon,
+  polygonMumbai,
   goerli
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
@@ -22,7 +22,7 @@ import { StrategiesProvider } from '@/context/StrategiesContext'
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const { chains, publicClient } = configureChains([polygon, goerli], [publicProvider()]);
+  const { chains, publicClient } = configureChains([polygonMumbai, goerli], [publicProvider()]);
 
 
   const { connectors } = getDefaultWallets({
