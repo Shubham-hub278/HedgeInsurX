@@ -11,7 +11,21 @@ export default function NavigationBar() {
         "Home", "Dashboard", "Insurance"
     ]
     return (
-        <>
+        <Box>
+
+            {/* overlay */}
+            <Box
+                h="100px"
+                w="100%"
+                zIndex={"tooltip"}
+                top={0}
+                bg="rgba(16, 24 ,39, 0.7)"
+                position={"fixed"}
+                sx={{
+                    backdropFilter: "blur(15px)",
+                }}
+            />
+
 
             <Box
                 w="100%"
@@ -75,6 +89,6 @@ export default function NavigationBar() {
                     </Box>
                 </HStack>
             </Box >
-        </>
+        </Box>
     );
 }
