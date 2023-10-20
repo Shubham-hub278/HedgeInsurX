@@ -55,12 +55,16 @@ const Tokens = ({ logos }: any) => {
 
     return (
         <ChakraProvider theme={theme}>
-            <Box w="100%" overflow="hidden" py={32}>
+            <Box w="100%" 
+            // position={"fixed"}
+                // zIndex={"0"}
+                bottom={0}
+                overflow="hidden" py={0}>
                 <Slider {...settings}>
                     {logos.map((logo: any, index: number) => (
                         <Box key={index} px={4}>
                             <Image
-                                h="100px"
+                                h="80px"
                                 w="auto"
                                 src={"/icons/" + logo} alt={`Logo ${index}`} />
                         </Box>

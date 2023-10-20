@@ -2,12 +2,11 @@
 
 
 
-import { Box, Center, VStack, Text, HStack, Button } from '@chakra-ui/react'
+import { Box, VStack, Text, Button } from '@chakra-ui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useEffect, useState } from 'react';
-
 import { FaChartBar } from 'react-icons/fa';
-import { FaShieldAlt } from 'react-icons/fa';
+// import { FaShieldAlt } from 'react-icons/fa';
 import { MdFlashOn } from 'react-icons/md';
 import { useAccount } from "wagmi";
 
@@ -72,7 +71,9 @@ export default function SidePanel() {
                             colorScheme='transparent'
                             fontSize={"sm"}
                         >
-                            <Text pl={3}>Strategies</Text>
+                            <Text pl={3}>
+                                Strategies                     
+                            </Text>
                         </Button>
                         <br />
                         <br />
@@ -81,7 +82,10 @@ export default function SidePanel() {
                             colorScheme='transparent'
                             fontSize={"sm"}
                         >
-                            <Text pl={3}>Integrations</Text>
+                            <Text pl={3}>
+                                Integrations
+                            
+                            </Text>
                         </Button>
                     </Box>
 
@@ -101,7 +105,7 @@ export default function SidePanel() {
                             borderRadius={"15px"}
                         >
 
-                            
+
                             <Text
                                 fontSize={"md"}
                                 fontWeight={"bold"}

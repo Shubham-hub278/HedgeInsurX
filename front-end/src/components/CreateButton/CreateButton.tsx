@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import { useSignInModal } from "@/context/useModalContext";
 import CreateStrategyModal from "../Modal/CreateStrategyModal";
-
+import { useAccount } from "wagmi";
 
 
 const CreateButton = () => {
-
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const { address, isConnected } = useAccount();
+    const isDisabled = isSignedIn ? false : true;
+    useEffect(() => {
+        if (isConnected) {
+            setIsSignedIn(true);
+        } else {
+            setIsSignedIn(false);
+        }
+    }, [address]);
     const { isModalOpen, openModal, closeModal }: any = useSignInModal();
-    const isDisabled = false; //replace with wallet connectivity
+
 
     return (
 
@@ -40,7 +49,8 @@ const CreateButton = () => {
                         }}
                         onClick={() => openModal('Modal content goes here')}
                     >
-                        Create Strategy
+                 
+                        Strategy
                     </Button>
                 </Box>
             </Box>
@@ -55,3 +65,4 @@ const CreateButton = () => {
 };
 
 export default CreateButton;
+

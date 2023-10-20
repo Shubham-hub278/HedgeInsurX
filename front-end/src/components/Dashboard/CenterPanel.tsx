@@ -35,7 +35,9 @@ const CenterPanel = (strategies: Strategy[] | any) => {
     >
       <Box mt={20}
         py={1} w="100%" pr={16} pl={8}>
-        <BulletTitle title=" Active Strategies" />
+        <BulletTitle title=
+          " Active Strategies"
+        />
 
         {data && (
           <>

@@ -22,7 +22,7 @@ export default function NavigationBar() {
                 pb={[1, 1, 4]}
                 px={[0, 0, 16]}>
                 <HStack
-                    border="solid 0.9px #253350"
+                    border={isHome ? "none" : "solid 0.9px #253350"}
                     bg={isHome ? "rgba(64, 4, 83, 0.3)" : "rgba(21, 34, 57, 0.8)"}
                     w="100%"
                     h="60px"
@@ -46,12 +46,16 @@ export default function NavigationBar() {
                             <Box
                                 h="40px"
                                 as="img"
-                                src="logo.png"
+                                src="logro.png"
                             />
                             <Heading
                                 // opacity={}
                                 color="whiteAlpha.600"
-                                fontSize={"2xl"} >HedgeInsurX</Heading>
+                                fontSize={"2xl"} >
+                                {/* HedgeInsurX */}
+
+                                MortyStack
+                            </Heading>
                         </HStack>
                     </Box>
 
@@ -70,7 +74,7 @@ export default function NavigationBar() {
                         <ConnectButton />
                     </Box>
                 </HStack>
-            </Box>
+            </Box >
         </>
     );
 }
