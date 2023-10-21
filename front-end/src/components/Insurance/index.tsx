@@ -1,5 +1,6 @@
 
 import { Box, Button, HStack, Heading, VStack } from '@chakra-ui/react'
+import SidePanel from '../Dashboard/LeftPanel';
 import CategoryComponent from './Category';
 import RiskPool from '../../../../contracts/hardhat/artifacts/contracts/RiskPool.sol/RiskPool.json';
 import {ethers} from "ethers";
@@ -28,33 +29,6 @@ export default function Insurance() {
         getPolicies()
     },[allPolicies])
 
-    console.log(allPolicies);
-// const levels = [
-//     {
-//         level: 'low Risk',
-//         sublevels: [
-//             ['50% discount', 'Free advice', 'Startbus'],
-//             ['Another discount', 'Another advice', 'Another bus'],
-//             ['Yet another discount', 'Yet another advice', 'Yet another bus'],
-//         ],
-//     },
-//     {
-//         level: 'Medium Risk',
-//         sublevels: [
-//             ['50% discount', 'Free advice', 'Startbus'],
-//             ['Another discount', 'Another advice', 'Another bus'],
-//             ['Yet another discount', 'Yet another advice', 'Yet another bus'],
-//         ],
-//     },
-//     {
-//         level: 'High Risk',
-//         sublevels: [
-//             ['50% discount', 'Free advice', 'Startbus'],
-//             ['Another discount', 'Another advice', 'Another bus'],
-//             ['Yet another discount', 'Yet another advice', 'Yet another bus'],
-//         ],
-//     },
-// ];
     return (
         <Box pt={32}>
             <VStack>

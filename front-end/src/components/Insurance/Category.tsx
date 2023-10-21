@@ -5,12 +5,11 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { Select } from '@chakra-ui/react';
 import RiskPool from '../../../../contracts/hardhat/artifacts/contracts/RiskPool.sol/RiskPool.json';
 import {ethers} from "ethers";
-import { useEffect, useState} from 'react';
-import { BigNumberish } from 'ethers';
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/react'
-
-interface Sublevel extends Array<string> { }
+import { useAccount} from 'wagmi'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Policy {
     id: string;
@@ -23,6 +22,12 @@ interface Policy {
 
 interface CategoryComponentProps {
     policies: Policy[];
+}
+
+declare global {
+    interface Window {
+      ethereum: any;
+    }
 }
 
 function getRiskType(string){
@@ -55,7 +60,44 @@ const CategoryComponent: React.FC<CategoryComponentProps> = ({ policies }) => {
             selectedLevelElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
-    console.log(policies);
+    const { address, isConnecting, isDisconnected } = useAccount();
+    const purchasePolicies = async(id,premium)=>{
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const riskPool = new ethers.Contract("0x5f2E44190482aB9a523D538F65F1D7fFC4ce34e1", RiskPool.abi,signer);
+        const usdcABI = ['function approve(address spender, uint256 amount) returns (bool)'];
+        const usdcAddress = "0x52d800ca262522580cebad275395ca6e7598c014";
+        const usdcContract = new ethers.Contract(usdcAddress,usdcABI,signer);
+        //const allowanceAmount =  ethers.parseUnits("1000000000", 6);
+        const givenAllowance = await usdcContract.approve("0x5f2E44190482aB9a523D538F65F1D7fFC4ce34e1",premium);
+        await givenAllowance.wait()
+        console.log(givenAllowance);
+        console.log(signer);
+        console.log(riskPool);
+        console.log(id);
+
+        if(!address){
+            toast.error("Please Connect Your Wallet", {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
+        else{
+            const response = await riskPool.purchasePolicy(id);
+            await response.wait()
+            .then( () => {
+                toast.success("Policy Purchased Succcessfully.", {
+                position: toast.POSITION.TOP_CENTER
+                });
+              }).catch( () => {
+                console.log(response);
+                toast.success("Some error occured.", {
+                  position: toast.POSITION.TOP_CENTER
+                });
+            })
+            //window.location.reload(true);
+        }
+    }
+
     if(!policies){
         return <Spinner />;
     }
@@ -113,12 +155,14 @@ const CategoryComponent: React.FC<CategoryComponentProps> = ({ policies }) => {
                                     </>
                                     <Box display="flex" alignItems = "center" justifyContent="center"
                                     marginTop="10px">
-                                    <Button >Get Quote</Button>
+                                    <Button onClick={()=>purchasePolicies(policy.id,policy.premium)}>
+                                        Get Quote</Button>
                                     </Box>
                                 </List>
                         </Flex>
                     </Flex>
                 ))}
+                <ToastContainer/>
             </Flex>
 </Box>
      );
