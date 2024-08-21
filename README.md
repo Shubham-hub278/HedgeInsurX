@@ -1,1 +1,1 @@
-# HedgeInsurX
+# Safe Yield Insurance
